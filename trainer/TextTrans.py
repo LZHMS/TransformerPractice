@@ -9,13 +9,16 @@ import torch
 from tqdm import tqdm
 from torch import nn, optim
 from torch.optim import Adam
-from dataset.datamanager import DataManeger
 
+from dataset.datamanager import DataManeger
 from model.transformer import Transformer
 from trainer.tools import idx_to_word, get_bleu, epoch_time
 
 
 class TextTranslator:
+    """
+    A standard task for transformer model: Natural Language Translator.
+    """
     def __init__(self, args):
         """
         Function:
@@ -23,9 +26,7 @@ class TextTranslator:
             step 2: load the dataset (multi30k).
             step 3: build transformer and optimizer.
         Args:
-            med_config (str): path for the mixture of encoder-decoder model's configuration file
-            image_size (int): input image size
-            vit (str): model size of vision transformer
+            args: configs include model parameters, training config, dataset and so on.
         """
         # GPU device setting
         self.device = torch.device(f"cuda:{args.gpu_id}" if args.gpu_id != -1 else 'cpu')
